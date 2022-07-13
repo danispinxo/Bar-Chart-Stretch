@@ -4,7 +4,6 @@
 <head>
   <meta charset="UTF-8">
   <title>BarChart Project</title>
-  <link href="style.css" type="text/css" rel="stylesheet">
 </head>
 <body>
 
@@ -21,7 +20,7 @@
         <h2>Customize Your Title</h2>
         <div>
           <label for="title-text">Your title: </label>
-          <input type="text" name="title-text" id="title-text" value="Customize">
+          <input type="text" name="title-text" id="title-text" value="Your title">
         </div>
         <div>
           <label for="title-color">Color: </label>
@@ -31,20 +30,18 @@
             <option value="red">Red</option>
             <option value="pink">Pink</option>
             <option value="purple">Purple</option>
+            <option value="green">Green</option>
           </select>
         </div>
         <div>
           <label for="title-size">Title Size: </label>
           <input type="number" name="title-size" id="title-size" value="25">
         </div>
-      <button id="apply-button">Apply!</button>
+      <button id="apply-button">Customize!</button>
       </div>
     </div>
-    <div>
-      <p>Title should appear here, formatted according to the user input!</p>
-    </div>
-    <div>
-
+    <div id="customized-title">
+      <p id="title-textbox">Title Placeholder</p>
     </div>
   </main>
   <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -68,13 +65,14 @@ function drawBarChart(data, options, element) {
 // use the information in the array to determine max and min, which will determine the y-axis
 // use SVG as a way of creating the rectangles
 
-let titleFormat = {};
+let titleText = document.getElementById("title-textbox");
 
 $('#apply-button').on('click', function() {
-  let titleText = document.getElementById("title-text").value;
-  let titleColour = document.getElementById("title-color").value;
-  let titleSize = document.getElementById("title-size").value;
-})
+  const custTitle = document.getElementById("customized-title");
+  custTitle.style.color = document.getElementById("title-color").value;
+  custTitle.style.fontSize = document.getElementById("title-size").value + "px";
+  titleText.textContent = document.getElementById("title-text").value;
+}); // retrieving the user input for the title and formatting the appropriate div
 
   </script>
 </body>
