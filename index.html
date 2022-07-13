@@ -35,17 +35,45 @@
         </div>
         <div>
           <label for="title-size">Title Size: </label>
-          <input type="number" name="title-size" id="title-size" value="25">
+          <input type="number" name="title-size" id="title-size" value="40">
         </div>
       <button id="apply-button">Customize!</button>
       </div>
     </div>
+
+    <div>
+      <h2>Input Your Data</h2>
+      <p>Here is where you should input your information for the bar graph. Be sure to fill out all values before submitting!</p>
+      <div>
+        <label for="bar-name-input">Name of bar: </label>
+        <input type="text" name="bar-name" id="bar-name" value="Name of bar">
+      </div>
+      <div>
+        <label for="value-input">Bar Value: </label>
+        <input type="number" name="value" id="bar-value" value="0">
+      </div>
+      <div>
+        <label for="bar-color">Bar Color: </label>
+        <select name="bar-color" id="bar-color">
+        <option value="blue">Blue</option>
+        <option value="red">Red</option>
+        <option value="pink">Pink</option>
+        <option value="purple">Purple</option>
+        <option value="orange">Orange</option>
+        </select>
+      </div>
+      <button id="bar-button">Add bar to graph!</button>
+    </div>
     <div id="customized-title">
       <p id="title-textbox">Title Placeholder</p>
+    </div>
+    <div>
+      <button id="show-data-button">Show Data!</button>
     </div>
   </main>
   <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
   <script>
+
 // This function draws the bar chart. It takes three arguments.
 // The first parameter is "data" which will be an array of numbers.
 // The second parameter is "options" which will be an object that has options pertaining to the chart itself like title, size, colour, and other CSS elements.
@@ -74,7 +102,21 @@ $('#apply-button').on('click', function() {
   titleText.textContent = document.getElementById("title-text").value;
 }); // retrieving the user input for the title and formatting the appropriate div
 
-  </script>
+let data = [];
+
+$('#bar-button').on('click', function() {
+  let newBar = {};
+  newBar.name = document.getElementById("bar-name").value;
+  newBar.value = document.getElementById("bar-value").value;
+  newBar.color = document.getElementById("bar-color").value;
+  data.push(newBar);
+}); // creating each new bar as an object when the bar button is pushed, then storing that object in the data array
+
+$('#show-data-button').on('click', function(){
+  console.log(data);
+});
+
+</script>
 </body>
 <footer> </footer>
 </html>
