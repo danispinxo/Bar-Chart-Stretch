@@ -82,7 +82,8 @@
         <div id="customized-title">
           <p id="title-textbox">Title Placeholder</p>
         </div>
-      <svg id="graph-placeholder" width="600" height="400" style='background-color: #f4e8f3;'>
+      <svg id="graph-placeholder" width="650" height="400" style='background-color: #f9f0f8;'>
+
       </svg>
     </div>
   </main>
@@ -114,6 +115,7 @@ $('#bar-button').on('click', function() {
   newBar.color = document.getElementById("bar-color").value;
   data.push(newBar);
   document.getElementById("bar-button").textContent = "Added!";
+ ;
 
 }); // creating each new bar as an object when the bar button is pushed, then storing that object in the data array
 
@@ -130,7 +132,7 @@ $('#show-data-button').on('click', function drawBarChart(){
     let barPercent = parseInt(data[i].value) / totalValue;
     let barWidth = barPercent * placeholderWidth;
 
-    document.getElementById("graph-placeholder").innerHTML += `<rect y=${(10 * (i + 1))+ (i * 50)}px width="${parseInt(barWidth)}" height="50" style="fill:${data[i].color}"/>`;
+    document.getElementById("graph-placeholder").innerHTML += `<rect y=${(10 * (i + 1))+ (i * 50)}px width="${parseInt(barWidth)}" height="50" style="fill:${data[i].color}"/>        <text fill="black" font-size="14" font-family="Courier" x="${parseInt(barWidth) + 5}" y="${((10 * (i + 1))+ (i * 50)) + 25}px">${data[i].name}</text>`;
   }
   console.log(data);
 }); //using the information from the data array to draw rectangles and put them in the SVG.
