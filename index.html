@@ -6,7 +6,6 @@
   <title>BarChart Project</title>
 </head>
 <body>
-
   <header>
     <h1 class='main-title' style="text-align: center;">Dani's Bar Chart Stretch Project</h1>
   </header>
@@ -25,12 +24,17 @@
         <div>
           <label for="title-color">Color: </label>
           <select name="title-color" id="title-color">
-            <option value="black">Black</option>
-            <option value="blue">Blue</option>
-            <option value="red">Red</option>
-            <option value="pink">Pink</option>
-            <option value="purple">Purple</option>
-            <option value="green">Green</option>
+            <option value="mediumorchid">Medium Orchid</option>
+            <option value="darkorchid">Dark Orchid</option>
+            <option value="blueviolet">Blue Violet</option>
+            <option value="magenta">Magenta</option>
+            <option value="darkmagenta">Dark Magenta</option>
+            <option value="deeppink">Deep Pink</option>
+            <option value="darkviolet">Dark Violet</option>
+            <option value="fuchsia">Fuchsia</option>
+            <option value="hotpink">Hot Pink</option>
+            <option value="lightpink">Light Pink</option>
+            <option value="mediumpurple">Medium Purple</option>
           </select>
         </div>
         <div>
@@ -55,37 +59,36 @@
       <div>
         <label for="bar-color">Bar Color: </label>
         <select name="bar-color" id="bar-color">
-        <option value="blue">Blue</option>
-        <option value="red">Red</option>
-        <option value="pink">Pink</option>
-        <option value="purple">Purple</option>
-        <option value="orange">Orange</option>
+          <option value="mediumorchid">Medium Orchid</option>
+          <option value="darkorchid">Dark Orchid</option>
+          <option value="blueviolet">Blue Violet</option>
+          <option value="magenta">Magenta</option>
+          <option value="darkmagenta">Dark Magenta</option>
+          <option value="deeppink">Deep Pink</option>
+          <option value="darkviolet">Dark Violet</option>
+          <option value="fuchsia">Fuchsia</option>
+          <option value="hotpink">Hot Pink</option>
+          <option value="lightpink">Light Pink</option>
+          <option value="mediumpurple">Medium Purple</option>
         </select>
       </div>
-      <button id="bar-button">Add bar to graph!</button>
-    </div>
-    <div id="customized-title">
-      <p id="title-textbox">Title Placeholder</p>
+      <button id="bar-button" style="margin:'20px'">Add bar to graph!</button>
     </div>
     <div>
-      <button id="show-data-button">Show Data!</button>
+      <button id="show-data-button" style="margin:'20px'">Assemble Chart</button>
+    </div>
+    <div>
+      <h2>This is where your bar chart will appear!</h2>
+        <div id="customized-title">
+          <p id="title-textbox">Title Placeholder</p>
+        </div>
+      <svg id="graph-placeholder" width="600" height="400" style='background-color: #f4e8f3;'>
+      </svg>
     </div>
   </main>
   <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
   <script>
 
-// This function draws the bar chart. It takes three arguments.
-// The first parameter is "data" which will be an array of numbers.
-// The second parameter is "options" which will be an object that has options pertaining to the chart itself like title, size, colour, and other CSS elements.
-// The third parameter is "element" and it determines which element to display the chart in.
-
-function drawBarChart(data, options, element) {
-
-}
-
-// use an SVG?
-// make a chart in HTML that's static
-// build out from a basic chart in HTML
 // label the elements with ids and work backwards from there
 // use jQuery to grab the ID of a bar and change its width
 // input comes in the form of a section like the title customizer that asks for title, value, colour
@@ -110,11 +113,34 @@ $('#bar-button').on('click', function() {
   newBar.value = document.getElementById("bar-value").value;
   newBar.color = document.getElementById("bar-color").value;
   data.push(newBar);
+  document.getElementById("bar-button").textContent = "Added!";
+
 }); // creating each new bar as an object when the bar button is pushed, then storing that object in the data array
 
-$('#show-data-button').on('click', function(){
+let totalValue = 0;
+
+$('#show-data-button').on('click', function drawBarChart(){
+  for (let x = 0; x < data.length; x++) {
+      totalValue += parseInt(data[x].value);
+    }
+  console.log("Total Value: " + totalValue);
+
+  for (let i = 0; i < data.length; i++) {
+    let placeholderWidth = 600;
+    let barPercent = parseInt(data[i].value) / totalValue;
+    let barWidth = barPercent * placeholderWidth;
+
+    document.getElementById("graph-placeholder").innerHTML += `<rect y=${(10 * (i + 1))+ (i * 50)}px width="${parseInt(barWidth)}" height="50" style="fill:${data[i].color}"/>`;
+  }
   console.log(data);
-});
+}); //using the information from the data array to draw rectangles and put them in the SVG.
+
+function drawBarChart(data, options, element) {
+
+} // This function draws the bar chart. It takes three arguments.
+// The first parameter is "data" which will be an array of numbers.
+// The second parameter is "options" which will be an object that has options pertaining to the chart itself like title, size, colour, and other CSS elements.
+// The third parameter is "element" and it determines which element to display the chart in.
 
 </script>
 </body>
