@@ -82,20 +82,13 @@
         <div id="customized-title">
           <p id="title-textbox">Title Placeholder</p>
         </div>
-      <svg id="graph-placeholder" width="650" height="400" style='background-color: #f9f0f8;'>
+      <svg id="graph-placeholder" width="650" height="400" style='background-color: #f9f0f8; border:1px solid black; margin:25px'>
 
       </svg>
     </div>
   </main>
   <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
   <script>
-
-// label the elements with ids and work backwards from there
-// use jQuery to grab the ID of a bar and change its width
-// input comes in the form of a section like the title customizer that asks for title, value, colour
-// that gets stored as an object in an array
-// use the information in the array to determine max and min, which will determine the y-axis
-// use SVG as a way of creating the rectangles
 
 let titleText = document.getElementById("title-textbox");
 
@@ -115,6 +108,12 @@ $('#bar-button').on('click', function() {
   newBar.color = document.getElementById("bar-color").value;
   data.push(newBar);
   document.getElementById("bar-button").textContent = "Added!";
+
+  const buttonChange = () => {
+    document.getElementById("bar-button").textContent = "Add new bar to graph!";
+  };
+
+  setTimeout(buttonChange, 1500);
  ;
 
 }); // creating each new bar as an object when the bar button is pushed, then storing that object in the data array
@@ -124,8 +123,7 @@ let totalValue = 0;
 $('#show-data-button').on('click', function drawBarChart(){
   for (let x = 0; x < data.length; x++) {
       totalValue += parseInt(data[x].value);
-    }
-  console.log("Total Value: " + totalValue);
+    } // determining the total value for the data
 
   for (let i = 0; i < data.length; i++) {
     let placeholderWidth = 600;
@@ -134,17 +132,17 @@ $('#show-data-button').on('click', function drawBarChart(){
 
     document.getElementById("graph-placeholder").innerHTML += `<rect y=${(10 * (i + 1))+ (i * 50)}px width="${parseInt(barWidth)}" height="50" style="fill:${data[i].color}"/>        <text fill="black" font-size="14" font-family="Courier" x="${parseInt(barWidth) + 5}" y="${((10 * (i + 1))+ (i * 50)) + 25}px">${data[i].name}</text>`;
   }
-  console.log(data);
 }); //using the information from the data array to draw rectangles and put them in the SVG.
 
-function drawBarChart(data, options, element) {
+// function drawBarChart(data, options, element) {
 
-} // This function draws the bar chart. It takes three arguments.
+// }
+// This function draws the bar chart. It takes three arguments.
 // The first parameter is "data" which will be an array of numbers.
 // The second parameter is "options" which will be an object that has options pertaining to the chart itself like title, size, colour, and other CSS elements.
 // The third parameter is "element" and it determines which element to display the chart in.
 
 </script>
 </body>
-<footer> </footer>
+<footer></footer>
 </html>
